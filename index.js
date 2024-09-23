@@ -11,7 +11,7 @@ function main() {
     switch (type) {
         case "db":
             const db = new Db();
-            db.create(className);
+            db.create();
             break;
         case "controller":
             const controller = new EgController();

@@ -1,35 +1,44 @@
-const path = require('path');
+const path = require("path");
+const fs = require("fs");
 
-class Db {
-    constructor(parameters) {
-        
+class EgDb {
+  constructor(parameters) {}
+
+  create() {
+
+    const classDir = path.join(process.cwd(), "src/config");
+    const classFilePath = path.join(classDir, "dbConfig.js");
+
+    if (fs.existsSync(classFilePath)) {
+      console.error(`File ${classFilePath} already exists.`);
+      process.exit(1);
     }
 
-    create(className) {
-        if (!className) {
-          console.error('Please provide a class name.');
-          process.exit(1);
-        }
+    // MySQL config template
+    const classTemplate = `
+// src/config/dbConfig.js
+const mysql = require('mysql2');
 
-        const classDir = path.join(process.cwd(), 'classes', className);
-        const classFilePath = path.join(classDir, `${className}.js`);
+// Create a connection pool
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'your-username',
+  password: 'your-password',
+  database: 'db-name',
+  connectionLimit: 10
+});
 
-        // const classTemplate = `
-        // class ${className} {
-        //   constructor() {
-        //     // constructor logic
-        //   }
-        
-        //   // methods
-        // }
+// Export the pool for use in other modules
+module.exports = pool.promise(); // Use promise-based API
+`;
 
-        // module.exports = ${className};
-        // `;
-
-        // fs.mkdirSync(classDir, { recursive: true });
-        // fs.writeFileSync(classFilePath, classTemplate.trim());
-        // console.log(`Class ${className} created successfully at ${classFilePath}`);
-    }
+    fs.mkdirSync(classDir, { recursive: true });
+    fs.writeFileSync(classFilePath, classTemplate.trim());
+    console.log(
+      `Db config file created successfully at ${classFilePath}`
+    );
+    process.exit(0);
+  }
 }
 
-module.exports = Db;
+module.exports = EgDb;
