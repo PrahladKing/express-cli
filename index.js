@@ -1,29 +1,31 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
+const Db = require('./eg-db');
+const EgController = require('./eg-controller');
+const EgModel = require('./eg-model');
 
-const className = process.argv[2];
+const type = process.argv[2];
+const className = process.argv[3];
 
-if (!className) {
-  console.error('Please provide a class name.');
-  process.exit(1);
+
+function main() {
+    switch (type) {
+        case "db":
+            const db = new Db();
+            db.create(className);
+            break;
+        case "controller":
+            const controller = new EgController();
+            controller.create(className);
+            break;
+        case "model":
+            const model = new EgModel();
+            model.create(className);
+            break;
+        default:
+            console.log("Invalid arguments");
+            break;
+    }    
 }
 
-const classDir = path.join(__dirname, 'classes', className);
-const classFilePath = path.join(classDir, `${className}.js`);
+main();
 
-const classTemplate = `
-class ${className} {
-  constructor() {
-    // constructor logic
-  }
-  
-  // methods
-}
-
-module.exports = ${className};
-`;
-
-fs.mkdirSync(classDir, { recursive: true });
-fs.writeFileSync(classFilePath, classTemplate.trim());
-console.log(`Class ${className} created successfully at ${classFilePath}`);

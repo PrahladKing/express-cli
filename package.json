@@ -4,7 +4,7 @@
   "description": "Command line interface tool for generating files used in express applications",
   "main": "index.js",
   "bin": {
-    "create-class": "index.js"
+    "eg": "index.js"
   },
   "scripts": {
     "start": "node index.js",
