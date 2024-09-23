@@ -1,6 +1,6 @@
 {
   "name": "express-command",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Command line interface tool for generating files used in express applications",
   "main": "index.js",
   "bin": {
