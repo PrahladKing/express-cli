@@ -21,7 +21,7 @@ class EgModel {
     let classNameCaps = words.map((word) => this.capitalize(word)).join("");
     let classNameCamel =
       classNameCaps.charAt(0).toLowerCase() + classNameCaps.slice(1);
-    const classDir = path.join(__dirname, "src/models");
+    const classDir = path.join(process.cwd(), "src/models");
     const classFilePath = path.join(classDir, `${classNameCamel}Model.js`);
 
     if (fs.existsSync(classFilePath)) {

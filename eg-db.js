@@ -11,7 +11,7 @@ class Db {
           process.exit(1);
         }
 
-        const classDir = path.join(__dirname, 'classes', className);
+        const classDir = path.join(process.cwd(), 'classes', className);
         const classFilePath = path.join(classDir, `${className}.js`);
 
         // const classTemplate = `
