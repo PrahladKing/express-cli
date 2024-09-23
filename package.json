@@ -1,12 +1,23 @@
 {
-  "name": "express-cli",
-  "version": "1.0.0",
-  "description": "Command line interface for generating files used in express applications",
+  "name": "express-command",
+  "version": "0.0.1",
+  "description": "Command line interface tool for generating files used in express applications",
   "main": "index.js",
+  "bin": {
+    "create-class": "index.js"
+  },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "Express CLI",
+    "Express DevKit",
+    "express",
+    "express-cli",
+    "devkit",
+    "sdk"
+  ],
   "author": "",
   "license": "ISC"
 }
